@@ -1,3 +1,3 @@
 ECHO OFF
-ECHO Hello World
+ECHO Batman is Bruce Wayne... hahaha
 PAUSE
