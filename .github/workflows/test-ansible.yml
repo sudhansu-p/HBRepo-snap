@@ -11,7 +11,7 @@ jobs:
           echo "Payload key1: ${{ github.event.client_payload.key1 }}"
           echo "Payload key2: ${{ github.event.client_payload.key2 }}"
 
-      - name: Dump full event JSON (optional)
+      - name: send the payload as json
         env:
           PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
