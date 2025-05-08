@@ -1,0 +1,19 @@
+name: Triggered from Ansible
+
+on:
+  repository_dispatch:
+    types: [ansible_trigger]
+
+jobs:
+  capture_payload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print full payload
+        run: |
+          echo "Received payload:"
+          echo '${{ toJson(github.event.client_payload) }}'
+
+      - name: Use payload values
+        run: |
+          echo "Key1: ${{ github.event.client_payload.key1 }}"
+          echo "Key2: ${{ github.event.client_payload.key2 }}"
