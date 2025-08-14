@@ -1,7 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
 name: HBaserepo-Hello-world-CI
-
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
@@ -9,21 +8,31 @@ on:
     branches: [ "master" , "development" ]
   pull_request:
     branches: [ "master" ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  Diff_repo_checkout_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+        with:
+          repository: sudhansu-p/CucumberTest-proj
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: CucumberTest-proj
+      - name: check the checkout repo content
+        run: |
+           echo "Hello, world!"
+           echo "printing default github token: ${{ secrets.GITHUB_TOKEN }}"
+           ls -lart
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
-
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
