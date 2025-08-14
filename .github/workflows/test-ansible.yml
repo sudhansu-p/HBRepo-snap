@@ -1,0 +1,19 @@
+on:
+  repository_dispatch:
+    types: [my_custom_event]
+
+jobs:
+  print_payload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print entire payload
+        run: |
+          echo "Payload key1: ${{ github.event.client_payload.key1 }}"
+          echo "Payload key2: ${{ github.event.client_payload.key2 }}"
+
+      - name: send the payload as json
+        env:
+          PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: |
+          echo "Full payload JSON:"
+          echo "$PAYLOAD"
