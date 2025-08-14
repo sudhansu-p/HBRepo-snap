@@ -34,9 +34,22 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-  Sonar:
+  Pr_Test:
     runs-on: ubuntu-latest
     steps:
-      - name: run a one-line script
-        run: echo "Starting execution of sonar"
+      - name: check if githubcli is present or not
+        run: |
+           gh --version
+      - name: Create Pull Request
+        run: |
+           echo "creating a pr from development to new_pr_test"
+           curl -X POST \
+             -H "Authorization: Bearer ${{ secrets.SUDHANSU_PAT_FG }}" \
+             -H "Accept: application/vnd.github+json" \ https://api.github.com/repos/${{ github.repository }}/pulls \
+           -d '{
+             "title": "Auto PR",
+             "head": "development",
+             "base": "new_pr_test",
+             "body": "This PR was created by GitHub Actions"
+           }'
       
