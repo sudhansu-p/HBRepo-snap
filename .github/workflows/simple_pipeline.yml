@@ -42,7 +42,7 @@ jobs:
       - name: create pr using GH CLI
         run: |
            gh --version
-           echo "${{ secrets.SUDHANSU_PAT_FG  }}" | gh auth login --with-token
+           echo "${{ secrets.SUDHANSU_PAT_CON_READ  }}" | gh auth login --with-token
            gh pr create --title "sample pr creation via workflow using gh cli" --body "testing pr creation via gh cli" --head "development"  --base "new_pr_test_ghcli"
   Pr_Test_CRL:
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
            echo "creating a pr from development to new_pr_test"
            echo "printing token: ${{ secrets.SUDHANSU_PAT_FG }}"
            echo "printing reponame: ${{ github.repository }}"
-           curl -X POST -H "Authorization: Bearer ${{ secrets.SUDHANSU_PAT_FG }}" \
+           curl -X POST -H "Authorization: Bearer ${{ secrets.SUDHANSU_PAT_CON_READ }}" \
            -H "Accept: application/vnd.github+json" \
            https://api.github.com/repos/sudhansu-p/HBRepo-snap/pulls \
            -d '{"title":"sample pr creation via workflow using curl","head":"development","base":"new_pr_test","body":"testing pr creation via curl"}'
