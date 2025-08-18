@@ -51,22 +51,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test and deploy your project.
-  Pr_Test_GHCLI:
+  Pr_Test_CRL:
     runs-on: ubuntu-latest
     permissions: 
       contents: write
       pull-requests: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5.0.0
-      - name: create pr using GH CLI
-        run: |
-           gh --version
-           # echo "${{ secrets.SUDHANSU_PAT_CON_READ  }}" | gh auth login --with-token
-           echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-           gh pr create --title "sample pr creation via workflow using gh cli" --body "testing pr creation via gh cli" --head "development"  --base "new_pr_test_ghcli"
-  Pr_Test_CRL:
-    runs-on: ubuntu-latest
     steps:
       - name: Create Pull Request
         run: |
