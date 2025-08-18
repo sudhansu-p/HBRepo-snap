@@ -11,9 +11,13 @@ on:
       - development
     paths:
       - .github/workflows/sample-ii.yaml
-
+  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  
+permissions:
+  contents: read
+  pull-requests: write
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -47,4 +51,4 @@ jobs:
         run: echo Hello, world!
       - name: checking basic github token permission
         run: |
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/actions/permissions
