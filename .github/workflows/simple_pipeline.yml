@@ -53,6 +53,9 @@ jobs:
           echo test and deploy your project.
   Pr_Test_GHCLI:
     runs-on: ubuntu-latest
+    permissions: 
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
