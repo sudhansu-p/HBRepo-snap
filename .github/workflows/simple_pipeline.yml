@@ -5,9 +5,10 @@ name: HBaserepo-Hello-world-CI
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master" , "development" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: 
+      - development
+    paths:
+      - .github/workflows/simple_pipeline.yaml
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
