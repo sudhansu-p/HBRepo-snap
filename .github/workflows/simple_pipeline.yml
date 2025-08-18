@@ -5,9 +5,10 @@ name: HBaserepo-Hello-world-CI
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master" , "development" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: 
+      - development
+    paths:
+      - .github/workflows/simple_pipeline.yml
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -27,6 +28,9 @@ jobs:
            echo "Hello, world!"
            echo "printing default github token: ${{ secrets.GITHUB_TOKEN }}"
            ls -lart
+           pwd
+           echo "checking the contents in the path CucumberTest-proj"
+           ls -lart CucumberTest-proj
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -42,7 +46,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          echo test, and deploy your project.
+          echo test and deploy your project.
   Pr_Test_GHCLI:
     runs-on: ubuntu-latest
     steps:
