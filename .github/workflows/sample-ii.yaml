@@ -7,9 +7,10 @@ name: HBaserepo-Hello-world-sample-ii
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: 
+      - development
+    paths:
+      - .github/workflows/sample-ii.yaml
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -30,14 +31,4 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-  Sonar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: run a one-line script
-        run: echo "Starting execution of sonar"
       
