@@ -25,10 +25,23 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
+      - name: checout the own repo
+        uses: actions/checkout@v4
+      - name: checking the files after first checkout
+        run: |
+          pwd
+          ls -lart
+      - name: Checkout another repo
+        uses: actions/checkout@v5.0.0
+        with:
+          repository: sudhansu-p/CucumberTest-proj
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: CucumberTest-proj
+      - name: checking the files after second checkout
+        run: |
+          pwd
+          ls -lart
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-
-      
