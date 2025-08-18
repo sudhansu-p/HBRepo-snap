@@ -7,12 +7,17 @@ name: HBaserepo-Hello-world-sample-ii
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
+    branches: 
+      - development
+    paths:
+      - .github/workflows/sample-ii.yaml
+  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  
+permissions:
+  contents: read
+  pull-requests: write
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,20 +29,27 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
+      - name: checout the own repo
+        uses: actions/checkout@v4
+      - name: checking the files after first checkout
+        run: |
+          pwd
+          ls -lart
+      - name: Checkout another repo
+        uses: actions/checkout@v5.0.0
+        with:
+          repository: sudhansu-p/CucumberTest-proj
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: CucumberTest-proj
+      - name: checking the files after second checkout
+        run: |
+          pwd
+          ls -lart
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: checking basic github token permission
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-  Sonar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: run a one-line script
-        run: echo "Starting execution of sonar"
-      
+          curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{ github.repository }}/actions/permissions
+          # curl -H "Authorization: token ${{ secrets.SUDHANSU_PAT_CON_READ  }}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/actions/permissions
